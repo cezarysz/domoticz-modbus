@@ -15,7 +15,7 @@
 # NOTE: Some "name" fields are abused to put in more options ;-)
 #
 """
-<plugin key="Modbus" name="Modbus RTU/ASCII/TCP - READ v1.2.1" author="C. Szymanski" version="1.2.1" /">
+<plugin key="Modbus" name="Modbus RTU/ASCII/TCP - READ v1.2.1" author="C. Szymanski" version="1.2.1" />
     <params>
         <param field="Mode1" label="Method" width="120px" required="true">
             <options>
