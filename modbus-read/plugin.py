@@ -15,7 +15,7 @@
 # NOTE: Some "name" fields are abused to put in more options ;-)
 #
 """
-<plugin key="Modbuser" name="Modbus RTU/ASCII/TCP - READ v1.2.2" author="C. Szy" version="1.2.1" externallink="" wikilink="https://github.com/DomoticX/domoticz-modbus/">
+<plugin key="Modbuser" name="Modbus RTU/ASCII/TCP - READ v1.2.3" author="C. Szy" version="1.2.1" externallink="" wikilink="https://github.com/DomoticX/domoticz-modbus/">
     <params>
         <param field="Mode1" label="Method" width="120px" required="true">
             <options>
@@ -293,7 +293,7 @@ class BasePlugin:
             if (Parameters["Mode5"] == "div100"): value = str(round(value / 100, 2))
             if (Parameters["Mode5"] == "div1000"): value = str(round(value / 1000, 3))
             if (Parameters["Mode5"] == "div10000"): value = str(round(value / 10000, 4))
-	    if (Parameters["Mode5"] == "div2"): value = str(round(value / 2, 2))
+            if (Parameters["Mode5"] == "div2"): value = str(round(value / 2, 2))
 		
             
             Devices[1].Update(0, value) # Update value in Domoticz
