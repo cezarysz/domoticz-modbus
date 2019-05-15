@@ -313,7 +313,7 @@ class BasePlugin:
             Domoticz.Log("Modbus error decoding or received no data (RTU)!, check your settings!")
             Devices[1].Update(0, "0") # Update value in Domoticz
 		
-        def UpdateDevice(Unit, nValue, sValue):
+    def UpdateDevice(Unit, nValue, sValue):
         # Make sure that the Domoticz device still exists (they can be deleted) before updating it 
         if (Unit in Devices):
           if (Devices[Unit].nValue != nValue) or (Devices[Unit].sValue != sValue):
