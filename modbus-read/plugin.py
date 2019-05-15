@@ -15,7 +15,7 @@
 # NOTE: Some "name" fields are abused to put in more options ;-)
 #
 """
-<plugin key="Modbuser" name="Modbus RTU/ASCII/TCP - READ v1.2.3" author="C. Szy" version="1.2.1" externallink="" wikilink="https://github.com/DomoticX/domoticz-modbus/">
+<plugin key="Modbuser" name="Modbus RTU/ASCII/TCP - READ v1.2.4" author="C. Szy" version="1.2.1" externallink="" wikilink="https://github.com/DomoticX/domoticz-modbus/">
     <params>
         <param field="Mode1" label="Method" width="120px" required="true">
             <options>
@@ -241,7 +241,7 @@ class BasePlugin:
             Domoticz.Debug("MODBUS DEBUG RESPONSE: " + str(data))
           except:
             Domoticz.Log("Modbus error communicating! (RTU), check your settings!")
-            Devices[1].Update(0, "0") # Update device to OFF in Domoticz
+            #Devices[1].Update(0, "0") # Update device to OFF in Domoticz
 
           try:
             # How to decode the input?
@@ -300,7 +300,7 @@ class BasePlugin:
 
           except:
             Domoticz.Log("Modbus error decoding or received no data (RTU/ASCII/RTU over TCP)!, check your settings!")
-            Devices[1].Update(0, "0") # Update value in Domoticz
+            #Devices[1].Update(0, "0") # Update value in Domoticz
 
 global _plugin
 _plugin = BasePlugin()
