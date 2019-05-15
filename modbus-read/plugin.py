@@ -237,7 +237,7 @@ class BasePlugin:
             client = ModbusSerialClient(method=Parameters["Mode1"], port=Parameters["SerialPort"], stopbits=StopBits, bytesize=ByteSize, parity=Parity, baudrate=int(Parameters["Mode2"]), timeout=1, retries=2)
           except:
             Domoticz.Log("Error opening Serial interface on "+Parameters["SerialPort"])
-	    Devices[1].Update(0, "0") # Update device in Domoticz
+            Devices[1].Update(0, "0") # Update device in Domoticz
 	
         ###################################
         # pymodbus section
