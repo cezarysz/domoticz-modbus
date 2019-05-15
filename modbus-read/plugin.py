@@ -227,6 +227,17 @@ class BasePlugin:
         UnitIdForIp = 1 # Default
         if len(AddressData) > 1:
           UnitIdForIp = AddressData[1]
+	###################################
+        # pymodbus: RTU / ASCII
+        ###################################
+        if (Parameters["Mode1"] == "rtu" or Parameters["Mode1"] == "ascii"):
+          Domoticz.Debug("MODBUS DEBUG USB SERIAL HW - Port="+Parameters["SerialPort"]+", BaudRate="+Parameters["Mode2"]+", StopBits="+str(StopBits)+", ByteSize="+str(ByteSize)+" Parity="+Parity)
+          Domoticz.Debug("MODBUS DEBUG USB SERIAL CMD - Method="+Parameters["Mode1"]+", Address="+UnitAddress+", Register="+Parameters["Password"]+", Function="+Parameters["Username"]+", Data type="+Parameters["Mode6"])
+          try:
+            client = ModbusSerialClient(method=Parameters["Mode1"], port=Parameters["SerialPort"], stopbits=StopBits, bytesize=ByteSize, parity=Parity, baudrate=int(Parameters["Mode2"]), timeout=1, retries=2)
+          except:
+            Domoticz.Log("Error opening Serial interface on "+Parameters["SerialPort"])
+	    Devices[1].Update(0, "0") # Update device in Domoticz
 	
         ###################################
         # pymodbus section
@@ -295,11 +306,11 @@ class BasePlugin:
             if (Parameters["Mode5"] == "div10000"): value = str(round(value / 10000, 4))
             if (Parameters["Mode5"] == "div2"): value = str(round(value / 2, 2))
 		
-            
-            Devices[1].Update(0, value) # Update value in Domoticz
+            if (value != "0"): Devices[1].Update(1, value) # Update value in Domoticz
+            #Devices[1].Update(0, value) # Update value in Domoticz
 
           except:
-            Domoticz.Log("Modbus error decoding or received no data (RTU/ASCII/RTU over TCP)!, check your settings!")
+            Domoticz.Log("Modbus error decoding or received no data (RTU)!, check your settings!")
             Devices[1].Update(0, "0") # Update value in Domoticz
 
 global _plugin
