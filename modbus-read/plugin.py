@@ -185,7 +185,7 @@ class BasePlugin:
         Domoticz.Log("onDisconnect called")
 
     def onHeartbeat(self):
-        #Domoticz.Log("onHeartbeat called")
+        Domoticz.Log("onHeartbeat called")
 
         # Wich serial port settings to use?
         if (Parameters["Mode3"] == "S1B8PN"): StopBits, ByteSize, Parity = 1, 8, "N"
