@@ -126,9 +126,9 @@ import Domoticz
 
 import sys
 # Raspberry Pi
-#sys.path.append('/usr/local/lib/python3.4/dist-packages')
+sys.path.append('/usr/local/lib/python3.4/dist-packages')
 sys.path.append('/usr/local/lib/python3.5/dist-packages')
-#sys.path.append('/usr/local/lib/python3.6/dist-packages')
+sys.path.append('/usr/local/lib/python3.6/dist-packages')
 
 # RTU
 from pymodbus.client.sync import ModbusSerialClient
@@ -139,8 +139,8 @@ from pymodbus.client.sync import ModbusSerialClient
 
 # TCP/IP
 # from pyModbusTCP.client import ModbusClient
-# from pymodbus.constants import Endian
-# from pymodbus.payload import BinaryPayloadDecoder
+from pymodbus.constants import Endian
+from pymodbus.payload import BinaryPayloadDecoder
 
 # Declare internal variables
 result = ""
@@ -301,14 +301,6 @@ class BasePlugin:
           except:
             Domoticz.Log("Modbus error decoding or received no data (RTU/ASCII/RTU over TCP)!, check your settings!")
             Devices[1].Update(0, "0") # Update value in Domoticz
-		
-def UpdateDevice(Unit, nValue, sValue):
-        # Make sure that the Domoticz device still exists (they can be deleted) before updating it
-        if (Unit in Devices):
-          if (Devices[Unit].nValue != nValue) or (Devices[Unit].sValue != sValue):
-            Devices[Unit].Update(nValue, str(sValue))
-            Domoticz.Log("Update "+str(nValue)+":'"+str(sValue)+"' ("+Devices[Unit].Name+")")
-        return
 
 global _plugin
 _plugin = BasePlugin()
