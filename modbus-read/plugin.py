@@ -315,7 +315,7 @@ class BasePlugin:
 		
     def UpdateDevice(Unit, nValue, sValue):
         # Make sure that the Domoticz device still exists (they can be deleted) before updating it 
-	if (Unit in Devices):
+        if (Unit in Devices):
           if (Devices[Unit].nValue != nValue) or (Devices[Unit].sValue != sValue):
             Devices[Unit].Update(nValue, str(sValue))
             Domoticz.Log("Update "+str(nValue)+":'"+str(sValue)+"' ("+Devices[Unit].Name+")")
