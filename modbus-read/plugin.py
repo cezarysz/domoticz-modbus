@@ -225,8 +225,8 @@ class BasePlugin:
 
         # Is there a unit ID given after the IP? (e.g. 192.168.2.100/56)
         UnitIdForIp = 1 # Default
-        if len(AddressData) > 1:
-          UnitIdForIp = AddressData[1]
+        #if len(AddressData) > 1:
+         # UnitIdForIp = AddressData[1]
 	###################################
         # pymodbus: RTU / ASCII
         ###################################
@@ -312,6 +312,14 @@ class BasePlugin:
           except:
             Domoticz.Log("Modbus error decoding or received no data (RTU)!, check your settings!")
             Devices[1].Update(0, "0") # Update value in Domoticz
+		
+        def UpdateDevice(Unit, nValue, sValue):
+        # Make sure that the Domoticz device still exists (they can be deleted) before updating it 
+        if (Unit in Devices):
+          if (Devices[Unit].nValue != nValue) or (Devices[Unit].sValue != sValue):
+            Devices[Unit].Update(nValue, str(sValue))
+            Domoticz.Log("Update "+str(nValue)+":'"+str(sValue)+"' ("+Devices[Unit].Name+")")
+        return
 
 global _plugin
 _plugin = BasePlugin()
