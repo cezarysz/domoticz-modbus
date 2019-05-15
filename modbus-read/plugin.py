@@ -230,7 +230,7 @@ class BasePlugin:
 	###################################
         # pymodbus: RTU / ASCII
         ###################################
-        if (Parameters["Mode1"] == "rtu" or Parameters["Mode1"] == "ascii"):
+        if (Parameters["Mode1"] == "rtu"):
           Domoticz.Debug("MODBUS DEBUG USB SERIAL HW - Port="+Parameters["SerialPort"]+", BaudRate="+Parameters["Mode2"]+", StopBits="+str(StopBits)+", ByteSize="+str(ByteSize)+" Parity="+Parity)
           Domoticz.Debug("MODBUS DEBUG USB SERIAL CMD - Method="+Parameters["Mode1"]+", Address="+UnitAddress+", Register="+Parameters["Password"]+", Function="+Parameters["Username"]+", Data type="+Parameters["Mode6"])
           try:
