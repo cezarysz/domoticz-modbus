@@ -156,7 +156,7 @@ class BasePlugin:
     def onStart(self):
         Domoticz.Log("onStart called")
         #if Parameters["Mode4"] == "debug": Domoticz.Debugging(1)
-        Domoticz.Debugging(0)	#Enable debugging by default, mode 4 is used for sensor mode
+        Domoticz.Debugging(1)	#Enable debugging by default, mode 4 is used for sensor mode
         Domoticz.Log("Sensor Type: "+Parameters["Mode4"])
         #Removed the full name parameter
         #Due to the lack of more parameter posibility, the name will be the hardware name
@@ -241,7 +241,7 @@ class BasePlugin:
             Domoticz.Debug("MODBUS DEBUG RESPONSE: " + str(data))
           except:
             Domoticz.Log("Modbus error communicating! (RTU), check your settings!")
-            Devices[1].Update(0, "10") # Update device to OFF in Domoticz
+            Devices[1].Update(0, "0") # Update device to OFF in Domoticz
 
           try:
             # How to decode the input?
@@ -300,7 +300,15 @@ class BasePlugin:
 
           except:
             Domoticz.Log("Modbus error decoding or received no data (RTU/ASCII/RTU over TCP)!, check your settings!")
-            Devices[1].Update(0, "12") # Update value in Domoticz
+            Devices[1].Update(0, "0") # Update value in Domoticz
+		
+def UpdateDevice(Unit, nValue, sValue):
+        # Make sure that the Domoticz device still exists (they can be deleted) before updating it
+        if (Unit in Devices):
+          if (Devices[Unit].nValue != nValue) or (Devices[Unit].sValue != sValue):
+            Devices[Unit].Update(nValue, str(sValue))
+            Domoticz.Log("Update "+str(nValue)+":'"+str(sValue)+"' ("+Devices[Unit].Name+")")
+        return
 
 global _plugin
 _plugin = BasePlugin()
