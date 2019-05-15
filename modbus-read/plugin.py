@@ -126,9 +126,9 @@ import Domoticz
 
 import sys
 # Raspberry Pi
-sys.path.append('/usr/local/lib/python3.4/dist-packages')
+#sys.path.append('/usr/local/lib/python3.4/dist-packages')
 sys.path.append('/usr/local/lib/python3.5/dist-packages')
-sys.path.append('/usr/local/lib/python3.6/dist-packages')
+#sys.path.append('/usr/local/lib/python3.6/dist-packages')
 
 # RTU
 from pymodbus.client.sync import ModbusSerialClient
@@ -220,13 +220,13 @@ class BasePlugin:
         if (Parameters["Mode6"] == "string8"): registercount = 8
 
         # Split address to support TCP/IP device ID
-        #AddressData = Parameters["Address"].split("/") # Split on "/"
-        #UnitAddress = AddressData[0]
+        AddressData = Parameters["Address"].split("/") # Split on "/"
+        UnitAddress = AddressData[0]
 
         # Is there a unit ID given after the IP? (e.g. 192.168.2.100/56)
-        #UnitIdForIp = 1 # Default
-        #if len(AddressData) > 1:
-        #  UnitIdForIp = AddressData[1]
+        UnitIdForIp = 1 # Default
+        if len(AddressData) > 1:
+          UnitIdForIp = AddressData[1]
 	
         ###################################
         # pymodbus section
@@ -240,7 +240,7 @@ class BasePlugin:
             if (Parameters["Username"] == "4"): data = client.read_input_registers(int(Parameters["Password"]), registercount, unit=int(UnitIdForIp))
             Domoticz.Debug("MODBUS DEBUG RESPONSE: " + str(data))
           except:
-            Domoticz.Log("Modbus error communicating! (RTU/ASCII/RTU over TCP), check your settings!")
+            Domoticz.Log("Modbus error communicating! (RTU), check your settings!")
             Devices[1].Update(0, "0") # Update device to OFF in Domoticz
 
           try:
