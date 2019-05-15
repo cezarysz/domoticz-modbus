@@ -241,7 +241,7 @@ class BasePlugin:
             Domoticz.Debug("MODBUS DEBUG RESPONSE: " + str(data))
           except:
             Domoticz.Log("Modbus error communicating! (RTU), check your settings!")
-            #Devices[1].Update(0, "0") # Update device to OFF in Domoticz
+            Devices[1].Update(0, "10") # Update device to OFF in Domoticz
 
           try:
             # How to decode the input?
@@ -300,7 +300,7 @@ class BasePlugin:
 
           except:
             Domoticz.Log("Modbus error decoding or received no data (RTU/ASCII/RTU over TCP)!, check your settings!")
-            #Devices[1].Update(0, "0") # Update value in Domoticz
+            Devices[1].Update(0, "12") # Update value in Domoticz
 
 global _plugin
 _plugin = BasePlugin()
